@@ -1,0 +1,401 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Monitors Kubernetes cluster using Prometheus. Shows overall cluster or Node CPU / Memory / Filesystem  基于K8 Cluster Detail Dashboard 和 Kubernetes for Prometheus Dashboard CN 20201209 修改，调整了布局",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": 14518,
+    "graphTooltip": 0,
+    "id": 43,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "columns": [],
+        "datasource": {
+          "type": "prometheus",
+          "uid": "25hT_r67z"
+        },
+        "description": "",
+        "fontSize": "80%",
+        "gridPos": {
+          "h": 25,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2073,
+        "showHeader": true,
+        "sort": {
+          "col": 30,
+          "desc": true
+        },
+        "styles": [
+          {
+            "$$hashKey": "object:1808",
+            "alias": "Instancia",
+            "align": "auto",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 1,
+            "link": false,
+            "linkTooltip": "",
+            "linkUrl": "",
+            "mappingType": 1,
+            "pattern": "nodename",
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:1810",
+            "alias": "Ram Total",
+            "align": "auto",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "link": false,
+            "mappingType": 1,
+            "pattern": "Value #B",
+            "thresholds": [],
+            "type": "number",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:1811",
+            "alias": "CPU Total",
+            "align": "auto",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "mappingType": 1,
+            "pattern": "Value #C",
+            "thresholds": [],
+            "type": "number",
+            "unit": "short"
+          },
+          {
+            "$$hashKey": "object:1814",
+            "alias": "Uso CPU",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "rgba(50, 172, 45, 0.97)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(245, 54, 54, 0.9)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #F",
+            "thresholds": [
+              "70",
+              "85"
+            ],
+            "type": "number",
+            "unit": "percent"
+          },
+          {
+            "$$hashKey": "object:1815",
+            "alias": "Uso RAM",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "rgba(50, 172, 45, 0.97)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(245, 54, 54, 0.9)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #G",
+            "thresholds": [
+              "70",
+              "85"
+            ],
+            "type": "number",
+            "unit": "percent"
+          },
+          {
+            "$$hashKey": "object:1823",
+            "alias": "",
+            "align": "right",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "decimals": 2,
+            "pattern": "/.*/",
+            "thresholds": [],
+            "type": "hidden",
+            "unit": "short"
+          }
+        ],
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "25hT_r67z"
+            },
+            "editorMode": "code",
+            "expr": "node_uname_info{} - 0",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "Instancia",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "25hT_r67z"
+            },
+            "expr": "node_memory_MemTotal_bytes{} - 0",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "legendFormat": "总内存",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "25hT_r67z"
+            },
+            "expr": "count(node_cpu_seconds_total{mode='system'}) by (instance)",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "legendFormat": "总核数",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "25hT_r67z"
+            },
+            "editorMode": "code",
+            "expr": "(1 - avg(rate(node_cpu_seconds_total{mode=\"idle\"}[2m])) by (instance)) * 100",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "legendFormat": "Uso CPU",
+            "refId": "F"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "25hT_r67z"
+            },
+            "editorMode": "code",
+            "expr": "(1 - (node_memory_MemAvailable_bytes{} / (node_memory_MemTotal_bytes{})))* 100",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "legendFormat": "Uso RAM",
+            "refId": "G"
+          }
+        ],
+        "title": "Nodes Overview - Produção",
+        "transform": "table",
+        "type": "table-old"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "25hT_r67z"
+        },
+        "description": "",
+        "gridPos": {
+          "h": 12,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 2075,
+        "libraryPanel": {
+          "description": "",
+          "meta": {
+            "connectedDashboards": 1,
+            "created": "2022-08-17T16:29:40Z",
+            "createdBy": {
+              "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
+              "id": 1,
+              "name": "admin"
+            },
+            "folderName": "Artec",
+            "folderUid": "Cz6q_renk",
+            "updated": "2022-08-17T16:29:40Z",
+            "updatedBy": {
+              "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
+              "id": 1,
+              "name": "admin"
+            }
+          },
+          "name": "Alertas",
+          "type": "alertlist",
+          "uid": "QLAoiwi4z",
+          "version": 1
+        },
+        "options": {
+          "alertInstanceLabelFilter": "",
+          "alertName": "",
+          "dashboardAlerts": false,
+          "folder": {
+            "id": 28,
+            "title": "Artec"
+          },
+          "groupBy": [],
+          "groupMode": "default",
+          "maxItems": 50,
+          "sortOrder": 4,
+          "stateFilter": {
+            "error": true,
+            "firing": true,
+            "noData": true,
+            "normal": false,
+            "pending": true
+          }
+        },
+        "title": "Alertas",
+        "type": "alertlist"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "25hT_r67z"
+        },
+        "description": "",
+        "gridPos": {
+          "h": 13,
+          "w": 12,
+          "x": 12,
+          "y": 12
+        },
+        "id": 2077,
+        "libraryPanel": {
+          "description": "",
+          "meta": {
+            "connectedDashboards": 1,
+            "created": "2022-08-17T16:29:46Z",
+            "createdBy": {
+              "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
+              "id": 1,
+              "name": "admin"
+            },
+            "folderName": "Artec",
+            "folderUid": "Cz6q_renk",
+            "updated": "2022-08-17T16:53:09Z",
+            "updatedBy": {
+              "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
+              "id": 1,
+              "name": "admin"
+            }
+          },
+          "name": "Monitoramento",
+          "type": "alertlist",
+          "uid": "S0PTiQm4z",
+          "version": 3
+        },
+        "options": {
+          "alertInstanceLabelFilter": "",
+          "alertName": "",
+          "dashboardAlerts": false,
+          "folder": {
+            "id": 28,
+            "title": "Artec"
+          },
+          "groupBy": [],
+          "groupMode": "default",
+          "maxItems": 50,
+          "sortOrder": 4,
+          "stateFilter": {
+            "error": false,
+            "firing": false,
+            "noData": false,
+            "normal": true,
+            "pending": false
+          }
+        },
+        "title": "Monitoramento",
+        "type": "alertlist"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 36,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-15m",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "Cluster overview - Alertas - Produção",
+    "uid": "jcdpwbcia",
+    "version": 9,
+    "weekStart": ""
+  }
